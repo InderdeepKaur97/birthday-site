@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ff5b88">
+  <title>Happy Birthday Shalini</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #38234f;
+      --pink: #ff5b88;
+      --yellow: #ffd85e;
+      --cream: #fffaf0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      background: linear-gradient(145deg, #ffb7c9 0%, #ffd9a8 47%, #c7f6e7 100%);
+    }
+    #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
+    .balloons { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+    .balloon { position: absolute; bottom: -120px; left: var(--left); width: 48px; height: 62px; border-radius: 50% 50% 46% 46%; background: linear-gradient(135deg, #ff5b9a 8%, #ff93ac 48%, #ffd84d 100%); opacity: .92; box-shadow: inset -7px -5px 0 rgba(0,0,0,.08), 0 5px 12px rgba(80,40,80,.12); animation: float-up var(--duration) linear var(--delay) infinite; }
+    .balloon.right { left: auto; right: var(--side); }
+    .balloon::before { content: ""; position: absolute; left: 19px; bottom: -5px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid #ff93ac; }
+    .balloon::after { content: ""; position: absolute; left: 23px; top: 65px; width: 1px; height: 52px; background: rgba(90,70,90,.45); }
+    @keyframes float-up { from { transform: translate3d(0, 0, 0) rotate(-5deg); } to { transform: translate3d(34px, -120vh, 0) rotate(8deg); } }
+    .page { position: relative; z-index: 1; display: grid; place-items: center; min-height: 100vh; padding: 32px 18px; }
+    .card {
+      width: min(100%, 650px);
+      padding: clamp(28px, 6vw, 54px);
+      text-align: center;
+      background: rgba(255, 250, 240, .92);
+      border: 3px solid rgba(255,255,255,.92);
+      border-radius: 34px;
+      box-shadow: 0 22px 60px rgba(105, 55, 96, .2);
+      backdrop-filter: blur(8px);
+    }
+    .eyebrow { margin: 0 0 10px; color: #9f5087; font-size: .8rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { position: relative; isolation: isolate; margin: 0; color: #fff5e6; font-size: clamp(3rem, 11vw, 6rem); line-height: .95; letter-spacing: -.06em; -webkit-text-stroke: 1px #ff8eb0; text-shadow: 0 0 8px rgba(255, 91, 136, .95), 0 0 20px rgba(255, 91, 136, .8), 0 0 32px rgba(255, 91, 136, .55); }
+    h1::before { content: ""; position: absolute; z-index: -1; inset: 12% -8%; border-radius: 50%; background: linear-gradient(100deg, rgba(255, 91, 154, .48), rgba(255, 216, 77, .52)); filter: blur(28px); }
+    .subtitle { margin: 19px 0 22px; font-size: clamp(1rem, 3vw, 1.2rem); line-height: 1.6; }
+    .countdown { margin: 0 auto 22px; }
+    .countdown-label { margin: 0 0 10px; color: #9f5087; font-weight: 800; }
+    .countdown-time { display: flex; justify-content: center; gap: 10px; }
+    .countdown-unit { min-width: 66px; padding: 9px 10px; border-radius: 14px; background: #fff0b9; box-shadow: 0 3px 0 #f2d98c; }
+    .countdown-unit strong { display: block; color: #d36b8d; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+    .countdown-unit span { color: #78677d; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .cake { position: relative; top: .5cm; display: inline-block; width: 104px; height: 100px; margin: 5px 0 8px; vertical-align: middle; filter: drop-shadow(0 8px 8px rgba(100,50,80,.14)); animation: bob 2.3s ease-in-out infinite; }
+    .cake-body { position: absolute; left: 12px; right: 12px; bottom: 9px; height: 47px; border: 3px solid #efdce3; border-radius: 9px 9px 14px 14px; background: repeating-linear-gradient(90deg, #fff 0 13px, #fff8fb 13px 16px); }
+    .cake-icing { position: absolute; z-index: 1; left: 10px; right: 10px; top: 34px; height: 23px; border: 3px solid #ec6f9c; border-radius: 50% 50% 8px 8px / 65% 65% 8px 8px; background: #ff9cbd; }
+    .cake-icing::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: -9px; height: 13px; background: radial-gradient(ellipse at 50% 0, #ff9cbd 0 58%, transparent 62%) 0 0 / 22px 13px repeat-x; }
+    .cake-candle { position: absolute; z-index: 2; left: 48px; top: 8px; width: 9px; height: 31px; border-radius: 3px 3px 1px 1px; background: repeating-linear-gradient(135deg, #fff 0 5px, #ff82aa 5px 9px); }
+    .cake-candle::before { content: ""; position: absolute; left: 1px; top: -14px; width: 7px; height: 12px; border-radius: 50% 50% 50% 0; background: #ffd34f; transform: rotate(-45deg); box-shadow: 0 0 8px rgba(255, 190, 50, .7); }
+    @keyframes bob { 50% { transform: translateY(-9px) rotate(2deg); } }
+    button { border: 0; border-radius: 999px; padding: 14px 22px; color: #fff; background: #8055d9; font: inherit; font-weight: 800; cursor: pointer; box-shadow: 0 6px 0 #5e38ac; transition: transform .15s, box-shadow .15s, background .15s; }
+    button:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #5e38ac; }
+    button:active { transform: translateY(3px); box-shadow: 0 3px 0 #5e38ac; }
+    button:focus-visible, input:focus-visible { outline: 3px solid #2c8a78; outline-offset: 4px; }
+    #musicButton { background: var(--pink); box-shadow: 0 6px 0 #d63c70; }
+    #musicButton:hover { box-shadow: 0 8px 0 #d63c70; }
+    .divider { height: 1px; margin: 30px 0 24px; background: linear-gradient(90deg, transparent, #e8b5d0, transparent); }
+    h2 { margin: 0 0 7px; font-size: 1.55rem; }
+    .hint { margin: 0 0 17px; color: #78677d; font-size: .95rem; }
+    form { display: flex; gap: 10px; }
+    input { min-width: 0; flex: 1; padding: 14px 16px; border: 2px solid #efd5e3; border-radius: 999px; background: #fff; color: var(--ink); font: inherit; }
+    input::placeholder { color: #a795a7; }
+    #wishList { display: grid; gap: 9px; margin: 18px 0 0; padding: 0; list-style: none; text-align: left; }
+    #wishList li { padding: 12px 15px; border-radius: 14px; background: #fff0b9; overflow-wrap: anywhere; animation: appear .25s ease-out; }
+    @keyframes appear { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .footer { margin: 24px 0 0; color: #a17791; font-size: .82rem; }
+    @media (max-width: 480px) { .card { border-radius: 26px; } form { flex-direction: column; } form button { width: 100%; } .countdown-time { gap: 6px; } .countdown-unit { min-width: 0; flex: 1; padding: 8px 3px; } .countdown-unit strong { font-size: 1.25rem; } .countdown-unit span { font-size: .62rem; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <div class="balloons" aria-hidden="true">
+    <span class="balloon" style="--left: 2%; --duration: 17s; --delay: -4s"></span>
+    <span class="balloon right" style="--side: 2%; --duration: 17s; --delay: -4s"></span>
+    <span class="balloon" style="--left: 12%; --duration: 21s; --delay: -13s"></span>
+    <span class="balloon right" style="--side: 12%; --duration: 21s; --delay: -13s"></span>
+    <span class="balloon" style="--left: 5%; --duration: 20s; --delay: -11s"></span>
+    <span class="balloon right" style="--side: 5%; --duration: 20s; --delay: -11s"></span>
+  </div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <main class="page">
+    <section class="card" aria-labelledby="birthday-title">
+      <p class="eyebrow">A little celebration for you</p>
+      <h1 id="birthday-title">Happy<br>Birthday Shalini</h1>
+      <div class="cake" aria-hidden="true"><span class="cake-candle"></span><span class="cake-icing"></span><span class="cake-body"></span></div>
+      <p class="subtitle">May your day be full of big smiles,<br>sweet surprises, and everything you love!</p>
+      <section class="countdown" aria-label="Birthday countdown">
+        <p class="countdown-label">Countdown until Shalini turns 30!</p>
+        <div class="countdown-time" aria-live="off">
+          <div class="countdown-unit"><strong id="countdownDays">0</strong><span>Days</span></div>
+          <div class="countdown-unit"><strong id="countdownHours">00</strong><span>Hours</span></div>
+          <div class="countdown-unit"><strong id="countdownMinutes">00</strong><span>Minutes</span></div>
+          <div class="countdown-unit"><strong id="countdownSeconds">00</strong><span>Seconds</span></div>
+        </div>
+      </section>
+      <button id="musicButton" type="button" aria-pressed="false">♫ &nbsp; Play birthday music</button>
+
+      <div class="divider"></div>
+      <h2>Send a birthday wish ✨</h2>
+      <p class="hint">Leave a little love for the birthday star.</p>
+      <form id="wishForm">
+        <label for="wishInput" hidden>Your birthday wish</label>
+        <input id="wishInput" name="wish" maxlength="180" placeholder="Type your birthday wish…" required>
+        <button type="submit">Send wish</button>
+      </form>
+      <ul id="wishList" aria-live="polite" aria-label="Birthday wishes"></ul>
+      <p class="footer">Made with confetti, cake &amp; a whole lot of love 💖</p>
+    </section>
+  </main>
+  <script>
+    // A lightweight canvas keeps the confetti colorful without external libraries.
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    const colors = ['#ffd700', '#f5c542', '#ffe066', '#daa520', '#fff0a6'];
+    let pieces = [];
+    let width = 0, height = 0;
+    function resizeCanvas() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth; height = window.innerHeight;
+      canvas.width = width * ratio; canvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      pieces = Array.from({ length: Math.min(150, Math.floor(width / 8)) }, () => ({
+        x: Math.random() * width, y: Math.random() * height,
+        size: 4 + Math.random() * 8, speed: 0.8 + Math.random() * 2.2,
+        drift: (Math.random() - .5) * 1.2, angle: Math.random() * Math.PI,
+        spin: (Math.random() - .5) * .08, color: colors[Math.floor(Math.random() * colors.length)]
+      }));
+    }
+    function drawConfetti() {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of pieces) {
+        p.y += p.speed; p.x += p.drift + Math.sin(p.y / 35) * .45; p.angle += p.spin;
+        if (p.y > height + 15) { p.y = -15; p.x = Math.random() * width; }
+        if (p.x < -15) p.x = width + 15;
+        if (p.x > width + 15) p.x = -15;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.angle); ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * .65); ctx.restore();
+      }
+      requestAnimationFrame(drawConfetti);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas(); drawConfetti();
+
+    function updateBirthdayCountdown() {
+      const now = new Date();
+      let target = new Date(now.getFullYear(), 11, 25);
+      if (target <= now) target = new Date(now.getFullYear() + 1, 11, 25);
+      const remaining = target - now;
+      document.getElementById('countdownDays').textContent = Math.floor(remaining / 86400000);
+      document.getElementById('countdownHours').textContent = String(Math.floor(remaining / 3600000) % 24).padStart(2, '0');
+      document.getElementById('countdownMinutes').textContent = String(Math.floor(remaining / 60000) % 60).padStart(2, '0');
+      document.getElementById('countdownSeconds').textContent = String(Math.floor(remaining / 1000) % 60).padStart(2, '0');
+    }
+    updateBirthdayCountdown();
+    setInterval(updateBirthdayCountdown, 1000);
+
+    document.getElementById('wishForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = document.getElementById('wishInput');
+      const wish = input.value.trim();
+      if (!wish) return;
+      const item = document.createElement('li');
+      item.textContent = `💌 ${wish}`;
+      document.getElementById('wishList').prepend(item);
+      input.value = ''; input.focus();
+    });
+
+    // The tune is synthesized in the browser, so the page works offline.
+    const musicButton = document.getElementById('musicButton');
+    let audioContext, musicTimer, noteIndex = 0;
+    const melody = [523.25, 523.25, 587.33, 523.25, 698.46, 659.25, 523.25, 523.25, 587.33, 523.25, 783.99, 698.46];
+    function playNote() {
+      if (!audioContext) return;
+      const now = audioContext.currentTime;
+      const oscillator = audioContext.createOscillator();
+      const volume = audioContext.createGain();
+      oscillator.type = 'sine';
+      oscillator.frequency.value = melody[noteIndex % melody.length];
+      volume.gain.setValueAtTime(.0001, now);
+      volume.gain.exponentialRampToValueAtTime(.13, now + .025);
+      volume.gain.exponentialRampToValueAtTime(.0001, now + .34);
+      oscillator.connect(volume); volume.connect(audioContext.destination);
+      oscillator.start(now); oscillator.stop(now + .36);
+      noteIndex++;
+    }
+    musicButton.addEventListener('click', async () => {
+      const playing = musicButton.getAttribute('aria-pressed') === 'true';
+      if (playing) {
+        clearInterval(musicTimer); musicTimer = null;
+        if (audioContext) await audioContext.suspend();
+        musicButton.setAttribute('aria-pressed', 'false');
+        musicButton.innerHTML = '♫ &nbsp; Play birthday music';
+      } else {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) { musicButton.textContent = 'Music is not supported here'; return; }
+        audioContext = audioContext || new AudioContextClass();
+        await audioContext.resume(); playNote();
+        musicTimer = setInterval(playNote, 390);
+        musicButton.setAttribute('aria-pressed', 'true');
+        musicButton.innerHTML = '♫ &nbsp; Pause birthday music';
+      }
+    });
+  </script>
+</body>
+</html>
